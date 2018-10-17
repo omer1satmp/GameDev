@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketballL01", "BasketballL01\BasketballL01\BasketballL01.csproj", "{333DFC9C-201A-4E74-8CE3-F08F7B75983F}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "BasketballL01Content", "BasketballL01\BasketballL01Content\BasketballL01Content.contentproj", "{BB0E2579-804B-49C4-935E-DC9C99781C87}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{333DFC9C-201A-4E74-8CE3-F08F7B75983F}.Debug|x86.ActiveCfg = Debug|x86
+		{333DFC9C-201A-4E74-8CE3-F08F7B75983F}.Debug|x86.Build.0 = Debug|x86
+		{333DFC9C-201A-4E74-8CE3-F08F7B75983F}.Release|x86.ActiveCfg = Release|x86
+		{333DFC9C-201A-4E74-8CE3-F08F7B75983F}.Release|x86.Build.0 = Release|x86
+		{BB0E2579-804B-49C4-935E-DC9C99781C87}.Debug|x86.ActiveCfg = Debug|x86
+		{BB0E2579-804B-49C4-935E-DC9C99781C87}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D703DC96-1D58-4CD9-8B56-BDF3478E3E43}
+	EndGlobalSection
+EndGlobal
