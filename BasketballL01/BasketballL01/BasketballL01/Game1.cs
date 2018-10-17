@@ -23,10 +23,14 @@ namespace BasketballL01
         SpriteBatch spriteBatch;
         private Texture2D ballSprite;
         private Texture2D paddleSprite;
+        private SoundEffect crashSound;
+        private SoundEffect swishSound;
+        private SpriteFont font;
         private Vector2 ballPosition = Vector2.Zero;
         private Vector2 paddlePosition = Vector2.Zero;
         private Vector2 ballSpeed = new Vector2(150,150);
-        private Vector2 paddleSpeed = new Vector2(250, 0);
+        private Vector2 paddleSpeed = new Vector2(350, 0);
+        private int score = 0;
 
         public Game1()
         {
@@ -59,6 +63,9 @@ namespace BasketballL01
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ballSprite = Content.Load<Texture2D>("basketball");
             paddleSprite = Content.Load<Texture2D>("hand");
+            crashSound = Content.Load<SoundEffect>("crash");
+            swishSound = Content.Load<SoundEffect>("swish");
+            font = Content.Load<SpriteFont>("Master");
         }
 
         /// <summary>
@@ -78,6 +85,33 @@ namespace BasketballL01
         protected override void Update(GameTime gameTime)
         {
             KeyboardState key = Keyboard.GetState();
+            Rectangle ballRectangle = new Rectangle((int)ballPosition.X, (int)ballPosition.Y, ballSprite.Width, ballSprite.Height);
+            Rectangle paddleRectangle = new Rectangle((int)paddlePosition.X, (int)paddlePosition.Y, paddleSprite.Width, paddleSprite.Height);
+
+
+            if (ballPosition.X > MAX_X_BALL || ballPosition.X < 0)
+            {
+                ballSpeed.X *= -1;
+            }
+
+            if (ballPosition.Y < 0)
+            {
+                ballSpeed.Y *= -1;
+            }
+            else if (ballPosition.Y > MAX_Y_BALL)
+            {
+                crashSound.Play();
+                ballPosition.Y = 0;
+                ballSpeed = new Vector2(150,150);
+                score = 0;
+            }
+
+            if (paddleRectangle.Intersects(ballRectangle) && ballSpeed.Y > 0)
+            {
+                swishSound.Play();
+                ballSpeed.Y *= -1.05f;
+                score++;
+            }
 
             if (key.IsKeyDown(Keys.Right))
             {
@@ -86,15 +120,6 @@ namespace BasketballL01
             else if (key.IsKeyDown(Keys.Left))
             {
                 paddlePosition.X -= paddleSpeed.X * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-
-            if (ballPosition.X > MAX_X_BALL || ballPosition.X < 0)
-            {
-                ballSpeed.X *= -1;
-            }
-            if (ballPosition.Y > MAX_Y_BALL || ballPosition.Y < 0)
-            {
-                ballSpeed.Y *= -1;
             }
 
 
@@ -113,6 +138,7 @@ namespace BasketballL01
             spriteBatch.Begin();
             spriteBatch.Draw(ballSprite, ballPosition, Color.White);
             spriteBatch.Draw(paddleSprite, paddlePosition, Color.White);
+            spriteBatch.DrawString(font, "score: " + score.ToString(), Vector2.One * 25, Color.Red);
 
             spriteBatch.End();
             base.Draw(gameTime);
